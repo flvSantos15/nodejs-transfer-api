@@ -1,0 +1,17 @@
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+  "name": "Flavio Santos",
+  "email": "flavio.santos@example.com",
+  "password": "123456"
+}
+
+###
+GET http://localhost:3333/users/get-by-email/flavio.santos@example.com
+Content-Type: application/json
+
+###
+GET http://localhost:3333/users
+Content-Type: application/json
+
