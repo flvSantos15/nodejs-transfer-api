@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { AppError } from "../../../../errors/AppError";
 import { AccountRepositoryPrisma } from "../../repository/implementation/AccountRepositoryPrisma";
-import { CreateAccountUseCase } from "./createAccount.useCase";
+import { GetAccountUseCase } from "./getAccount.useCase";
 
 const accountRepositoryPrisma = new AccountRepositoryPrisma();
-const createAccountUseCase = new CreateAccountUseCase(accountRepositoryPrisma);
+const getAccountUseCase = new GetAccountUseCase(accountRepositoryPrisma);
 
-export class CreateAccountController {
+export class GetAccountController {
   async handle(request: Request, response: Response) {
     const { userId } = request.params;
 
@@ -15,9 +15,9 @@ export class CreateAccountController {
     }
 
     try {
-      await createAccountUseCase.execute({ userId });
+      const account = await getAccountUseCase.execute({ userId });
 
-      response.status(201).send("Account created successfully");
+      response.status(200).json(account);
     } catch (error) {
       throw new AppError(error.message, error.statusCode);
     }

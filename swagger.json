@@ -87,16 +87,75 @@
         }
       }
     },
-    "/users/:id/account": {
-      "get": {},
-      "post": {}
+    "/account/:userId": {
+      "post": {
+        "tags": ["Account"],
+        "summary": "Create a new account",
+        "description": "Create a new account",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Account created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {}
     },
-    "/users/:id/transactions/:accountId": {
+    "/account/:userId/:accountId": {
       "get": {},
       "post": {}
     },
     "/auth/login": {
-      "post": {}
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login",
+        "description": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password"],
+                "example": {
+                  "email": "john.doe@example.com",
+                  "password": "password123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   }
 }

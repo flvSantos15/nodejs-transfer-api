@@ -32,3 +32,4 @@ export class AccountRepositoryPrisma implements IAccountRepository {
     return account;
   }
 }
+
