@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
-import { AppError } from "../../../../../errors/AppError";
-import { IUserRepository } from "../../../repository/IUserRepository";
+import { AppError } from "../../../../errors/AppError";
+import { IUserRepository } from "../../repository/IUserRepository";
 
 interface ICreateUserUseCaseRequest {
   name: string;
@@ -26,7 +26,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
       throw new AppError("User already exists", 400);
     }
 
-    const passwordHash = await hash(password, 8);
+    const passwordHash = await hash(password, 10);
 
     this.userRepo.create({ name, email, password: passwordHash });
   }

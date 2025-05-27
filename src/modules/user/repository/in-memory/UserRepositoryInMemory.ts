@@ -19,5 +19,11 @@ export class UserRepositoryInMemory implements IUserRepository {
   async getUsers(): Promise<TUser[]> {
     return this.users;
   }
+
+  async getUserById(id: string): Promise<TUser | null> {
+    const foundUser = this.users.find((user) => user.id === id);
+
+    return foundUser || null;
+  }
 }
 

@@ -1,5 +1,5 @@
-import { TUser } from "../../../entity/User";
-import { IUserRepository } from "../../../repository/IUserRepository";
+import { TUser } from "../../entity/User";
+import { IUserRepository } from "../../repository/IUserRepository";
 
 interface IGetUsersUseCase {
   execute(): Promise<TUser[]>;

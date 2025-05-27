@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserRepositoryPrisma } from "../../../repository/implementation/UserRepositoryPrisma";
+import { UserRepositoryPrisma } from "../../repository/implementation/UserRepositoryPrisma";
 import { GetUserByEmailUseCase } from "./getUserByEmail.useCase";
 
 const userRepo = new UserRepositoryPrisma();

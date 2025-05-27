@@ -24,6 +24,7 @@ export class UserRepositoryPrisma implements IUserRepository {
         id: true,
         name: true,
         email: true,
+        password: true,
       },
     });
 
@@ -31,9 +32,31 @@ export class UserRepositoryPrisma implements IUserRepository {
   }
 
   async getUsers(): Promise<TUser[]> {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+    });
 
     return users;
+  }
+
+  async getUserById(id: string): Promise<TUser | null> {
+    const foundUser = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        password: true,
+      },
+    });
+
+    return foundUser;
   }
 }
 

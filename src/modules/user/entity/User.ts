@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { v4 as uuidv4 } from "uuid";
 
 export type TUser = {
   id?: string;
@@ -14,7 +14,7 @@ export class User implements TUser {
   password?: string;
 
   constructor({ name, email, password }: TUser) {
-    this.id = crypto.randomUUID();
+    this.id = uuidv4();
     this.name = name;
     this.email = email;
     this.password = password;
