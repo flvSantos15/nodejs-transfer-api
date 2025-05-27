@@ -11,7 +11,7 @@ export class AuthenticateUserController {
     const { email, password } = request.body;
 
     if (!email || !password) {
-      response.status(400).json({ error: "Email and password are required" });
+      throw new AppError("Email and password are required", 400);
     }
 
     try {
@@ -19,8 +19,7 @@ export class AuthenticateUserController {
 
       response.status(200).json(token);
     } catch (error) {
-      console.log("Error =>", error);
-      throw new AppError("Internal server error", 500);
+      throw new AppError(error.message, error.statusCode);
     }
   }
 }

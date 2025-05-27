@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../../../errors/AppError";
 import { UserRepositoryPrisma } from "../../repository/implementation/UserRepositoryPrisma";
 import { CreateUserUseCase } from "./createUser.useCase";
 
@@ -20,7 +21,7 @@ export class CreateUserController {
 
       response.status(201).json({ message: "User created successfully" });
     } catch (error) {
-      response.status(500).json({ error: "Internal server error" });
+      throw new AppError(error.message, error.statusCode);
     }
   }
 }

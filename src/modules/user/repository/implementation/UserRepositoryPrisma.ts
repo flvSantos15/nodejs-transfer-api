@@ -8,6 +8,7 @@ export class UserRepositoryPrisma implements IUserRepository {
 
     await prisma.user.create({
       data: {
+        id: user.id,
         name: user.name,
         email: user.email,
         password: user.password as string,

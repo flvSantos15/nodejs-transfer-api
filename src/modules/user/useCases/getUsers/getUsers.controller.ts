@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../../../errors/AppError";
 import { UserRepositoryPrisma } from "../../repository/implementation/UserRepositoryPrisma";
 import { GetUsersUseCase } from "./getUsers.useCase";
 
@@ -12,7 +13,7 @@ export class GetUsersController {
 
       response.status(200).json(users);
     } catch (error) {
-      response.status(500).json({ error: "Internal server error" });
+      throw new AppError(error.message, error.statusCode);
     }
   }
 }

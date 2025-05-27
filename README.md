@@ -7,6 +7,7 @@ Uma API simples de transferência bancária entre contas com autenticação JWT 
 - Cadastro de usuário com hash de senha
 - Login com geração de token JWT
 - Criação de conta bancária para usuário
+
 - Depósito em conta bancária
 - Saque em conta bancária
 - Transferência entre contas
