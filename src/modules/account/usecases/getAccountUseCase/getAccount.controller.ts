@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppError } from "../../../../errors/AppError";
-import { AccountRepositoryPrisma } from "../../repository/implementation/AccountRepositoryPrisma";
+import { AccountRepositoryPrisma } from "../../repository/prisma/AccountRepositoryPrisma";
 import { GetAccountUseCase } from "./getAccount.useCase";
 
 const accountRepositoryPrisma = new AccountRepositoryPrisma();

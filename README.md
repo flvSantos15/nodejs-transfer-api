@@ -7,16 +7,16 @@ Uma API simples de transferência bancária entre contas com autenticação JWT 
 - Cadastro de usuário com hash de senha
 - Login com geração de token JWT
 - Criação de conta bancária para usuário
+- Listagem de todos os usuários
+- Autenticação com JWT
+- Consulta de saldo do usuário autenticado
+- Busca de usuário por email
+- Validações de autenticação
 
 - Depósito em conta bancária
 - Saque em conta bancária
 - Transferência entre contas
-- Consulta de saldo do usuário autenticado
-- Listagem de todos os usuários
-- Busca de usuário por email
-- Autenticação com JWT
 - Validações de entrada
-- Validações de autenticação
 - Documentação com Swagger
 - Testes com Jest
 - Containerização com Docker

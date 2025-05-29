@@ -8,8 +8,16 @@ const accountRouter = Router();
 const createAccountController = new CreateAccountController();
 const getAccountController = new GetAccountController();
 
-accountRouter.post("/:userId", authMiddleware, createAccountController.handle);
-accountRouter.get("/:userId", authMiddleware, getAccountController.handle);
+accountRouter.post(
+  "/create-account/:userId",
+  authMiddleware,
+  createAccountController.handle,
+);
+accountRouter.get(
+  "/balance/:userId",
+  authMiddleware,
+  getAccountController.handle,
+);
 
 export { accountRouter };
 

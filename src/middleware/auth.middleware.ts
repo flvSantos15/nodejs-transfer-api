@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { AppError } from "../errors/AppError";
-import { UserRepositoryPrisma } from "../modules/user/repository/implementation/UserRepositoryPrisma";
+import { UserRepositoryPrisma } from "../modules/user/repository/prisma/UserRepositoryPrisma";
 
 interface Payload {
   id: string;

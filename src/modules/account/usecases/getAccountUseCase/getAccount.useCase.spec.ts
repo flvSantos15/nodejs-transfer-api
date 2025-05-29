@@ -1,5 +1,5 @@
 import { AppError } from "../../../../errors/AppError";
-import { AccountRepositoryInMemory } from "../../repository/in-memory/UserRepositoryInMemory";
+import { AccountRepositoryInMemory } from "../../repository/in-memory/AccountRepositoryInMemory";
 import { GetAccountUseCase } from "./getAccount.useCase";
 
 let getAccountUseCase: GetAccountUseCase;
