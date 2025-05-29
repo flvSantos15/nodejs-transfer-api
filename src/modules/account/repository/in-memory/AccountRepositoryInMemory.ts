@@ -34,6 +34,14 @@ export class AccountRepositoryInMemory implements IAccountRepository {
       throw new AppError("Account not found", 404);
     }
 
+    if (account.balance < amount) {
+      throw new AppError("Insufficient balance", 400);
+    }
+
+    if (amount <= 0) {
+      throw new AppError("Amount must be greater than 0", 400);
+    }
+
     account.balance -= amount;
   }
 }
