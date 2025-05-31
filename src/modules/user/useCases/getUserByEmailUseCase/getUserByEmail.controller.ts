@@ -18,8 +18,12 @@ export class GetUserByEmailController {
       const user = await getUserByEmailUseCase.execute({ email });
 
       response.status(200).json(user);
-    } catch (error) {
-      throw new AppError(error.message, error.statusCode);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new AppError(error.message, 400);
+      } else {
+        throw new AppError("An unknown error occurred", 500);
+      }
     }
   }
 }

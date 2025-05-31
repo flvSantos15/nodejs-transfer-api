@@ -3,13 +3,24 @@ import { verify } from "jsonwebtoken";
 import { AppError } from "../errors/AppError";
 import { UserRepositoryPrisma } from "../modules/user/repository/prisma/UserRepositoryPrisma";
 
+// Extend the Express Request type to include the user property
+declare global {
+  namespace Express {
+    interface Request {
+      user: {
+        id: string;
+      };
+    }
+  }
+}
+
 interface Payload {
   id: string;
 }
 
 export async function authMiddleware(
   request: Request,
-  response: Response,
+  _response: Response,
   next: NextFunction,
 ) {
   const authHeader = request.headers.authorization;
@@ -28,7 +39,7 @@ export async function authMiddleware(
     const user = await userRepo.getUserById(decode.id);
 
     if (!user) {
-      throw new AppError("User does not exists", 401);
+      throw new AppError("User does not exist", 401);
     }
 
     request.user = {

@@ -1,5 +1,5 @@
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
-
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../swagger.json";
 
@@ -8,6 +8,23 @@ import { router } from "./routes";
 
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? ["https://your-production-domain.com"]
+      : [
+          "http://localhost:3000",
+          "http://127.0.0.1:3000",
+          "http://localhost:4200",
+          "http://127.0.0.1:4200",
+        ],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));

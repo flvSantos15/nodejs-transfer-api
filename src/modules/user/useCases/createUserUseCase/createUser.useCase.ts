@@ -1,5 +1,6 @@
 import { hash } from "bcrypt";
 import { AppError } from "../../../../errors/AppError";
+import { IEmailService } from "../../../../services/interfaces/IEmailService";
 import { IUserRepository } from "../../repository/IUserRepository";
 
 interface ICreateUserUseCaseRequest {
@@ -13,7 +14,10 @@ interface ICreateUserUseCase {
 }
 
 export class CreateUserUseCase implements ICreateUserUseCase {
-  constructor(private userRepo: IUserRepository) {}
+  constructor(
+    private userRepo: IUserRepository,
+    private emailService: IEmailService,
+  ) {}
 
   async execute({
     name,
@@ -29,6 +33,9 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     const passwordHash = await hash(password, 10);
 
     this.userRepo.create({ name, email, password: passwordHash });
+
+    // envio email de boas vindas
+    await this.emailService.sendWelcomeEmail(email, name);
   }
 }
 

@@ -18,8 +18,12 @@ export class CreateAccountController {
       await createAccountUseCase.execute({ userId });
 
       response.status(201).send("Account created successfully");
-    } catch (error) {
-      throw new AppError(error.message, error.statusCode);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new AppError(error.message, 400);
+      } else {
+        throw new AppError('An unknown error occurred', 500);
+      }
     }
   }
 }

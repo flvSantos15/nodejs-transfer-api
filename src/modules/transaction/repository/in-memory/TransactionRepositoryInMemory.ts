@@ -8,7 +8,7 @@ import { ITransactionRepository } from "../ITransactionRepository";
 export class TransactionRepositoryInMemory implements ITransactionRepository {
   private transactions: TTransaction[] = [];
 
-  deposit(accountId: string, amount: number): Promise<void> {
+  async deposit(accountId: string, amount: number): Promise<void> {
     const transaction = new Transaction({
       originAccountId: accountId,
       destinationAccountId: accountId,
@@ -17,10 +17,13 @@ export class TransactionRepositoryInMemory implements ITransactionRepository {
     });
 
     this.transactions.push(transaction);
-    return;
   }
 
-  withdraw(accountId: string, amount: number, userId: string): Promise<void> {
+  async withdraw(
+    accountId: string,
+    amount: number,
+    _userId: string,
+  ): Promise<void> {
     const transaction = new Transaction({
       originAccountId: accountId,
       destinationAccountId: accountId,
@@ -29,14 +32,13 @@ export class TransactionRepositoryInMemory implements ITransactionRepository {
     });
 
     this.transactions.push(transaction);
-    return;
   }
 
-  transfer(
+  async transfer(
     originAccountId: string,
     destinationAccountId: string,
     amount: number,
-    userId: string,
+    _userId: string,
   ): Promise<void> {
     const transaction = new Transaction({
       originAccountId,
@@ -46,7 +48,6 @@ export class TransactionRepositoryInMemory implements ITransactionRepository {
     });
 
     this.transactions.push(transaction);
-    return;
   }
 }
 

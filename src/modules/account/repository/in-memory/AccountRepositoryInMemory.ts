@@ -14,7 +14,11 @@ export class AccountRepositoryInMemory implements IAccountRepository {
   async getAccountByUserId(userId: string): Promise<TAccount> {
     const account = this.accounts.find((account) => account.userId === userId);
 
-    return account;
+    if (!account) {
+      throw new AppError("Account not found", 404);
+    }
+
+    return new Account(account);
   }
 
   async increaseBalance(accountId: string, amount: number): Promise<void> {
