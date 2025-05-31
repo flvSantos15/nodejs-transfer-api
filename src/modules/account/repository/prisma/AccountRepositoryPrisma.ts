@@ -1,3 +1,4 @@
+import { AppError } from "../../../../errors/AppError";
 import { prisma } from "../../../../lib/prisma";
 import { Account, TAccount } from "../../entity/TAccount";
 import { IAccountRepository } from "../IAccountRepository";
@@ -26,7 +27,7 @@ export class AccountRepositoryPrisma implements IAccountRepository {
     });
 
     if (!account) {
-      return null;
+      throw new AppError("Account not found", 404);
     }
 
     return account;

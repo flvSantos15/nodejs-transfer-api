@@ -14,11 +14,7 @@ export class TransactionRepositoryPrisma implements ITransactionRepository {
     await prisma.transaction.create({ data: transaction });
   }
 
-  async withdraw(
-    accountId: string,
-    amount: number,
-    _userId: string,
-  ): Promise<void> {
+  async withdraw(accountId: string, amount: number): Promise<void> {
     const transaction = new Transaction({
       originAccountId: accountId,
       destinationAccountId: accountId,
@@ -33,7 +29,6 @@ export class TransactionRepositoryPrisma implements ITransactionRepository {
     originAccountId: string,
     destinationAccountId: string,
     amount: number,
-    _userId: string,
   ): Promise<void> {
     const transaction = new Transaction({
       originAccountId,

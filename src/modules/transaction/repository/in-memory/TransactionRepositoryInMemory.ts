@@ -19,11 +19,7 @@ export class TransactionRepositoryInMemory implements ITransactionRepository {
     this.transactions.push(transaction);
   }
 
-  async withdraw(
-    accountId: string,
-    amount: number,
-    _userId: string,
-  ): Promise<void> {
+  async withdraw(accountId: string, amount: number): Promise<void> {
     const transaction = new Transaction({
       originAccountId: accountId,
       destinationAccountId: accountId,
@@ -38,7 +34,6 @@ export class TransactionRepositoryInMemory implements ITransactionRepository {
     originAccountId: string,
     destinationAccountId: string,
     amount: number,
-    _userId: string,
   ): Promise<void> {
     const transaction = new Transaction({
       originAccountId,

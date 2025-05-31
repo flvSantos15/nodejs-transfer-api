@@ -12,16 +12,17 @@ Uma API simples de transferência bancária entre contas com autenticação JWT 
 - Consulta de saldo do usuário autenticado
 - Busca de usuário por email
 - Validações de autenticação
-
 - Depósito em conta bancária
 - Saque em conta bancária
 - Transferência entre contas
-- Validações de entrada
-- Documentação com Swagger
-- Testes com Jest
 - Containerização com Docker
 - ORM com Prisma
 - Banco de dados PostgreSQL
+
+- Validações de entrada
+- Documentação com Swagger
+- Testes com Jest
+- Envio de email
 
 ---
 
@@ -36,6 +37,7 @@ Uma API simples de transferência bancária entre contas com autenticação JWT 
 - Jest
 - Docker
 - Swagger
+- Nodemailer
 
 ---
 
