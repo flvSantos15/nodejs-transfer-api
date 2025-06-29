@@ -18,8 +18,8 @@ Uma API simples de transferência bancária entre contas com autenticação JWT 
 - Containerização com Docker
 - ORM com Prisma
 - Banco de dados PostgreSQL
-
 - Validações de entrada
+
 - Documentação com Swagger
 - Testes com Jest
 - Envio de email
