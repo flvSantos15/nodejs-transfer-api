@@ -144,7 +144,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/usr/app/generated/prisma",
+      "value": "/home/flvsantos/dev/www/transfer-api/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -153,12 +153,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "linux-musl-openssl-3.0.x",
+        "value": "debian-openssl-3.0.x",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/usr/app/prisma/schema.prisma",
+    "sourceFilePath": "/home/flvsantos/dev/www/transfer-api/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -172,6 +176,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -180,8 +185,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String    @id @default(uuid())\n  name     String\n  email    String    @unique\n  password String\n  Account  Account[]\n\n  @@map(\"users\")\n}\n\nmodel Account {\n  id      String @id @default(uuid())\n  name    String\n  userId  String @map(\"user_id\")\n  balance Float  @default(0)\n\n  user                 User          @relation(fields: [userId], references: [id])\n  sentTransactions     Transaction[] @relation(\"OriginAccount\")\n  receivedTransactions Transaction[] @relation(\"DestinationAccount\")\n\n  @@map(\"accounts\")\n}\n\nmodel Transaction {\n  id                   String   @id @default(uuid())\n  amount               Float\n  type                 String\n  originAccountId      String   @map(\"origin_account_id\")\n  destinationAccountId String   @map(\"destination_account_id\")\n  createdAt            DateTime @default(now()) @map(\"created_at\")\n  updatedAt            DateTime @updatedAt @map(\"updated_at\")\n\n  originAccount      Account @relation(\"OriginAccount\", fields: [originAccountId], references: [id], onDelete: Restrict)\n  destinationAccount Account @relation(\"DestinationAccount\", fields: [destinationAccountId], references: [id], onDelete: Restrict)\n\n  @@map(\"transactions\")\n}\n",
-  "inlineSchemaHash": "a8cf1365735f4da8cd2dbb0d980de2fc7c7794f5f5b3f61ed181a0ebfce06a7e",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n  output        = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String    @id @default(uuid())\n  name     String\n  email    String    @unique\n  password String\n  Account  Account[]\n\n  @@map(\"users\")\n}\n\nmodel Account {\n  id      String @id @default(uuid())\n  name    String\n  userId  String @map(\"user_id\")\n  balance Float  @default(0)\n\n  user                 User          @relation(fields: [userId], references: [id])\n  sentTransactions     Transaction[] @relation(\"OriginAccount\")\n  receivedTransactions Transaction[] @relation(\"DestinationAccount\")\n\n  @@map(\"accounts\")\n}\n\nmodel Transaction {\n  id                   String   @id @default(uuid())\n  amount               Float\n  type                 String\n  originAccountId      String   @map(\"origin_account_id\")\n  destinationAccountId String   @map(\"destination_account_id\")\n  createdAt            DateTime @default(now()) @map(\"created_at\")\n  updatedAt            DateTime @updatedAt @map(\"updated_at\")\n\n  originAccount      Account @relation(\"OriginAccount\", fields: [originAccountId], references: [id], onDelete: Restrict)\n  destinationAccount Account @relation(\"DestinationAccount\", fields: [destinationAccountId], references: [id], onDelete: Restrict)\n\n  @@map(\"transactions\")\n}\n",
+  "inlineSchemaHash": "eb9ed847b79b5040401ead765decd4ab29e2b0e17bb90f1a4ba9fc899c9b6f24",
   "copyEngine": true
 }
 
@@ -220,8 +225,12 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-rhel-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/prisma/schema.prisma")
