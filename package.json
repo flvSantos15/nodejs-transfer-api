@@ -4,7 +4,8 @@
   "main": "src/server.ts",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
@@ -39,3 +40,4 @@
     "typescript": "^5.8.3"
   }
 }
+
