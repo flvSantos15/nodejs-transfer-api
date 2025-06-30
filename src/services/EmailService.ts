@@ -1,8 +1,9 @@
 // src/services/EmailService.ts
 import nodemailer from "nodemailer";
 import { emailConfig } from "../config/email";
+import { IEmailService } from "./interfaces/IEmailService";
 
-export class EmailService {
+export class EmailService implements IEmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
@@ -34,3 +35,4 @@ export class EmailService {
     }
   }
 }
+

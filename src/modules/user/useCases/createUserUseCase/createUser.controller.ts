@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { AppError } from "../../../../errors/AppError";
-import { EmailService } from "../../../../services/EmailService";
+import { EmailServiceMock } from "../../../../services/EmailServiceMock";
 import { UserRepositoryPrisma } from "../../repository/prisma/UserRepositoryPrisma";
 import { CreateUserUseCase } from "./createUser.useCase";
 
 const userRepo = new UserRepositoryPrisma();
-const emailService = new EmailService();
+const emailService = new EmailServiceMock();
 const createUserUseCase = new CreateUserUseCase(userRepo, emailService);
 
 export class CreateUserController {
